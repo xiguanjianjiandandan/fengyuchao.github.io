@@ -1,0 +1,792 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>gulp与webpack前端模块化构建工具的使用 | 沉默抒怀者</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="冯煜超">
+    
+    <meta name="description" content="##第一步：gulp的安装（前提是需要先安装nodejs）
+
+npm install gulp -g （全局安装）
+npm init(package.json) 
+npm install gulp -D;(nodemoudle)本地安装
+ package.json文件的说明： {   “name”:">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml## RSS address." title="沉默抒怀者" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/pacman.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/fish_footer.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/fish_footer.jpg">
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- 标签云侵入样式 -->
+  <style>
+    .tagcloudlist {position:relative; height:300px;}
+    .tagcloudlist  a {position:absolute; top:0px; left:0px;  text-decoration:none; padding: 3px 6px; }
+    .tagcloudlist  a:hover {border: 1px solid #eee; background: #000; }
+    
+    .ac_results {
+            padding: 0px;
+            border: 1px solid black;
+            background-color: white;
+            overflow: hidden;
+            z-index: 99999;
+        }
+    .ac_results ul {
+        width: 100%;
+        list-style-position: outside;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .ac_results li {
+        margin: 0px;
+        padding: 2px 5px;
+        cursor: default;
+        display: block;
+        font: menu;
+        font-size: 12px;
+        line-height: 16px;
+        overflow: hidden;
+    }
+    .ac_loading {
+        background: #FFF;
+    }
+    .ac_odd {
+        background-color: #EEE;
+    }
+    .ac_over {
+        background-color: #AAA;
+        color: #FFF;
+    }
+
+  </style>
+
+    <script src="/js/jquery-2.1.0.min.js"></script>
+    <script src="/js/autocomplete.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/miaov.js"></script>
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/fish_font.jpg" alt="沉默抒怀者" title="沉默抒怀者"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="沉默抒怀者">沉默抒怀者</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/about">About Me</a></li>
+					
+					
+					<li> <a href="/atom.xml">RSS</a> </li>
+
+					<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+
+
+				<li>
+					
+					 <form id="searchform" class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+                    <label>Search</label>
+                    <input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
+               		 </form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/09/28/02-前端工程化之gulp与webpack详解/" title="gulp与webpack前端模块化构建工具的使用" itemprop="url">gulp与webpack前端模块化构建工具的使用</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="冯煜超">冯煜超</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-09-28T00:20:40.847Z" itemprop="datePublished">2016-09-28</time>
+    Updated:<time datetime="2016-09-28T00:31:52.372Z" itemprop="dateModified">2016-09-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>##第一步：gulp的安装（前提是需要先安装nodejs）</p>
+<ol>
+<li>npm install gulp -g （全局安装）</li>
+<li>npm init(package.json) </li>
+<li><p>npm install gulp -D;(nodemoudle)本地安装</p>
+<p> package.json文件的说明：<br><pre><br> {<br>   “name”: “test”,   //项目名称（必须）<br>   “version”: “1.0.0”,   //项目版本（必须）<br>   “description”: “This is for study gulp project !”,   //项目描述（必须）<br>   “homepage”: “”,   //项目主页<br>   “repository”: {    //项目资源库</pre></p>
+<pre><code>&quot;type&quot;: &quot;git&quot;,
+&quot;url&quot;: &quot;https://git.oschina.net/xxxx&quot;
+</code></pre><p>   },<br>   “author”: {    //项目作者信息</p>
+<pre><code>&quot;name&quot;: &quot;surging&quot;,
+&quot;email&quot;: &quot;surging2@qq.com&quot;
+</code></pre><p>   },<br>   “license”: “ISC”,    //项目许可协议<br>   “devDependencies”: {    //项目依赖的插件</p>
+<pre><code>&quot;gulp&quot;: &quot;^3.8.11&quot;,
+&quot;gulp-less&quot;: &quot;^3.0.0&quot;
+</code></pre><p>   }<br> }<br><br>具体细节请点击地址：<a href="http://www.cnblogs.com/tzyy/p/5193811.html" target="_blank" rel="external">http://www.cnblogs.com/tzyy/p/5193811.html</a></p>
+<p> npm相关命令：</p>
+<ol>
+<li>npm安装插件：npm install 插件名 –save-dev或者npm install 插件名 -D</li>
+<li>npm卸载插件：npm uninstall 插件名</li>
+</ol>
+</li>
+</ol>
+<p>##第二步：gulpfile.js文件的配置：<br>一般所有的任务都是在该文件中配置，然后在命令行中执行该文件中配置的任务。格式如下：</p>
+<pre><code>//一：导入gulp模块之后，才可以使用gulp命令
+var gulp=require(&apos;gulp&apos;);
+
+
+二:单个任务配置
+gulp.task(&apos;任务名&apos;,function(){
+    gulp.src(&apos;&apos;)//src中一般是要操作的文件的路径
+    .pipe();//pipe一般是对文件的具体操作。
+})
+//然后在命令中执行如下命令：
+gulp 任务名;
+
+
+//三:多个任务，即任务队列的执行（即把所有的自定义任务全部添加到默认任务中）
+gulp.task(&apos;default&apos;,[&apos;copy-index&apos;,&apos;copy-images&apos;,&apos;webserver&apos;],function(){
+    console.log(&apos;任务队列执行完毕&apos;);
+});
+//然后在命令行中执行如下命令：
+gulp; 
+或者
+gulp default;
+
+//四：任务处理程序
+gulp.task(&apos;任务名&apos;,funciton(){
+    gulp.src(源文件)
+    .pipe(对源文件的处理操作)
+    .pipe(把处理后的文件输出到指定位置)
+})
+</code></pre><p>##三：gulpfile.js常见任务的实现：</p>
+<p>###文件拷贝任务<br>    1：拷贝单个文件<br>        gulp.task(‘copyindex’,function(){<br>            gulp.src(‘./index.html’).pipe(gulp.dest(‘./build/‘));<br>        });<br>    2：拷贝文件夹<br>        gulp.src(‘./images/<em>.{png,jpg}’)<br>            拷贝当前文件以及子目录等所有文件<br>        //    gulp.src(‘./images/**/</em>‘)<br>                .pipe(gulp.dest(‘./build/images/‘));<br>        });<br>    3：同时拷贝多个文件<br>        gulp.task(‘copydata’,function(){<br>            gulp.src([‘./index.html’,’./images/<strong>/*’])<br>                .pipe(gulp.dest(‘./build/data’));<br>        });<br>    4：拷贝多个文件（同时过滤部分文件）<br>    gulp.task(‘copypartdata’,function(){<br>        gulp.src([‘./index.html’,’./images/</strong>/<em>‘,’!./images/</em>.jpg’])<br>            .pipe(gulp.dest(‘./build/data’));<br>    });</p>
+<pre><code>    说明：gulp.src指定要操作的源文件，可以是单个字符，也可以是数组
+         gulp.dest()指定修改之后的文件的输出路径。
+         拷贝多个文件就用[]来引用多个文件
+         过滤部分文件就用感叹号！来实现。
+
+
+5：如果以上四个任务同时执行，该如何实现呢？
+gulp.task(&apos;copy&apos;,[&apos;copyindex&apos;,&apos;copyimages&apos;,&apos;copydata&apos;,&apos;copypartdata&apos;],function(){
+    console.log(&quot;任务队列执行完毕&quot;);
+})
+    注意点：此时四个任务是同时执行，即并行执行，当然我们也可以通过sequence设置成串行执行
+
+6：任务监听：当任务比较多个时候，每次修改了任务，都需要我们重新执行一次，
+才可以使目标文件也得以改变，这样就会很麻烦，这时，我们可以为多个任务设置监听，
+这样只要任务对应的源文件修改，该监听任务就会被触发，这样目标文件也会自动修改。
+gulp.task(&apos;watch&apos;,function(){
+    gulp.watch(&apos;./index.html&apos;,[&apos;copyindex&apos;]);
+    gulp.watch(&apos;./images/**/*&apos;,[&apos;copyimage&apos;]);
+    gulp.watch([&apos;./index.html&apos;,[./images/**/*]],[&apos;copydata&apos;]);
+});
+
+然后我们命令行中，只需开启watch任务，它就会在后台一直运行着，监听指定任务的变化
+
+    fyc@fengyuchao MINGW64 ~/Desktop/gulpdemo
+    $ gulp watch
+    [20:30:39] Using gulpfile ~\Desktop\gulpdemo\gulpfile.js
+    [20:30:39] Starting &apos;watch&apos;...
+    [20:30:39] Finished &apos;watch&apos; after 17 ms
+    [20:30:49] Starting &apos;copyindex&apos;...
+    [20:30:49] Finished &apos;copyindex&apos; after 24 ms
+    [20:30:58] Starting &apos;copyindex&apos;...
+    [20:30:58] Finished &apos;copyindex&apos; after 3.21 ms
+</code></pre><p>##四：sass插件的使用</p>
+<p>####第一步：安装插件<br>    $ cnpm install gulp-sass -D</p>
+<p>####第二步：在gulpfile.js中引入插件<br>    //引入sass预编译<br>    var sass=require(‘gulp-sass’);<br>    //引入sass压缩模块<br>    var minifyCSS=require(‘gulp-minify-css’);</p>
+<p>####第三步：创建sass预编译以及压缩任务<br>    var cssFiles=[<br>        ‘./src/styles/app.scss’//scss预编译的源文件，可以是多个<br>    ];<br>    gulp.task(‘scss’,function(){<br>        gulp.src(cssFiles)<br>            .pipe(sass().on(‘error’,sass.logError))//注意必须要输出错误日志<br>            .pipe(minifyCSS())//压缩css文件<br>            .pipe(gulp.dest(‘./build/prd/styles/‘));//输出到指定位置<br>    });</p>
+<p>####第四步：执行任务<br>    fyc@fengyuchao MINGW64 ~/Desktop/gulpdemo<br>    $ gulp scss<br>    [21:02:10] Using gulpfile ~\Desktop\gulpdemo\gulpfile.js<br>    [21:02:10] Starting ‘scss’…<br>    [21:02:10] Finished ‘scss’ after 11 ms</p>
+<p>##五:gulp本地服务插件gulp-webserver</p>
+<p>####第一步：安装插件<br>    cnpm install gulp-webserver;</p>
+<p>####第二步：引入插件<br>    var webserver=require(‘gulp-webserver’);</p>
+<p>####第三步：创建插件，同时进行相关配置<br>    gulp.task(‘webserver’,function(){<br>    gulp.src(‘./‘)//指定在哪个文件夹下开启服务<br>        .pipe(webserver({<br>            host:’localhost’,<br>            port:80,<br>            directoryListing:{<br>                enable:true,//表示浏览器访问的时候，可以显示目录<br>                path:’./‘  //表示浏览器访问的时候，显示指定目录<br>            },<br>            livereload:true//表示当内容更改时，浏览器自动刷新<br>        }));<br>    });</p>
+<p>####第四步：开启任务<br>    gulp webserver;//开启服务（按ctrl+c退出本地服务）</p>
+<p>##六：文件合并与压缩（js文件）</p>
+<p>####第一步：安装插件<br>    cnpm install gulp-concat -D//合并<br>    cnpm install gulp-uglify -D//压缩</p>
+<p>####第二步：引入插件<br>    /引入contact模块<br>    var concat=require(‘gulp-concat’);</p>
+<pre><code>//引入js压缩模块
+var uglify=require(&apos;gulp-uglify&apos;);
+</code></pre><p>####第三步：创建任务<br>    gulp.task(‘concat’,function(){<br>        gulp.src([‘./myscripts/first.js’,’./myscripts/second.js’])//要合并的文件放在数组中<br>            .pipe(concat(‘vender.js’))//合并文件<br>            .pipe(uglify())//将合并后的文件再压缩<br>            .pipe(gulp.dest(‘./build/js/‘));//输出文件<br>    });</p>
+<pre><code>注意：此时压缩后的文件名也为wender.js，会把原来合并的文件覆盖掉，
+    那么如何才能保证合并后的文件和压缩后的文件同时存在呢？就需要用到另个插件：gulp-rename;
+
+    gulp.task(&apos;concat&apos;,function(){
+        gulp.src([&apos;./myscripts/first.js&apos;,&apos;./myscripts/second.js&apos;])
+        .pipe(concat(&apos;vender.js&apos;))
+        .pipe(gulp.dest(&apos;.build/js/&apos;))//合并后先输出一次
+        .pipe(rename(&apos;vender.min.js&apos;))//重命名
+        .pipe(uglify())//压缩
+        .pipe(gulp.dest(&apos;./build/js/&apos;));//压缩后在输出一次
+    });
+</code></pre><p>#####第四步：开启任务<br>    gulp concat;//开启任务</p>
+<p>#七:webpack使用</p>
+<p>####1：安装插件<br>    cnpm install webpack -g;//注意webpack全局和本地都要安装</p>
+<p>####2：常见用法：</p>
+<p>#####文件打包：</p>
+<pre><code>*    文件打包：webpack 源文件  目标文件
+</code></pre><p>#####webpack模块化：</p>
+<pre><code>1. 导入js模块：即使用commonjs中的require()导入指定模块。
+2. 导入css模块：使用css-loader和style-loader模块导入
+      * 安装插件：$ cnpm install css-loader style-loader -D
+      * 在js中导入插件：require(&apos;style!css!./index.css&apos;);
+</code></pre><p>#####webpack.config.js配置文件的配置</p>
+<p>######1：webpack.config.js文件的配置：<br>    module.exports={<br>    entry:’./entry.js’,//定义入口文件<br>    output:{//定义输出文件的路径和文件名<br>        path:__dirname,<br>        filename:’bundle.js’<br>    },<br>    module:{<br>        //定义加载器，是一个数组<br>        loaders:[<br>            {<br>                //表示所有.css文件都是以style!css加载器去加载。<br>                test:/.css/,<br>                loader:’style!css’<br>            }<br>        ]<br>        }<br>    }</p>
+<p>######2：配置号webpack配置文件之后，我们在js中导入css模块的时候，就不需要再指定加载器<br>        require(‘./index.css’);<br>        注意：如果没有配置webpack.config.js文件，则导入css模块的时候，必须配置加载器：即<br>        require(‘style!css!./index.css’);</p>
+<p>######3.sourcemap的配置：<br>    作用：主要用于我们在测试的时候，可以在浏览器的source标签下查看源代码</p>
+<pre><code>默认情况下，如果没有配置source-map，则浏览器下只会显示：出入文件index.html，
+而那些name.js等等其他模块文件时不会显示的。
+
+那么如何才能让这些文件也显示出来呢？
+执行如下命令：webpack --devtool source-map
+或者在配置文件中配置：dev-tool:&apos;sourcemap&apos;.这样我们在执行的时候，将entry.js文件
+打包成bundle.js的同时，将其他文件也会显示到浏览器的source标签下。
+</code></pre><p>##八：gulp与webpack的结合使用</p>
+<p>#####第一步：安装插件<br>    npm install viny-named -D;//文件名模块<br>    npm install gulp-webpack -D;//js打包模块<br>    npm install gulp-uglify -D;//js压缩模块<br>    npm install imports-loader -D;//webpack中的加载器模块</p>
+<p>#####第二步：引入插件<br>    /引入js文件名模块<br>    var named=require(‘vinyl-named’);<br>    //引入webpack模块<br>    var webpack=require(‘gulp-webpack’);<br>    //引入js压缩模块<br>    var uglify=require(‘gulp-uglify’);<br>    //注意：imports-loader模块不需要引入，直接在webpack中使用</p>
+<p>#####第三步：创建任务<br>    //js源文件<br>    var jsFiles=[<br>    ‘./src/scripts/app.js’//可以配置多个文件<br>    ]</p>
+<pre><code>gulp.task(&apos;packjs&apos;, function () {
+  gulp.src(jsFiles)
+    .pipe(named())//将源文件的文件名加到管道流中（在打包输出时会用到name）
+    .pipe(webpack({
+      output: {
+        filename: &apos;[name].js&apos;//此时name就表示加入管道流中的文件名(这样输出文件和源文件的文件名保持一致。)
+      },
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            loader: &apos;imports?define=&gt;false&apos;
+
+          }
+        ]
+      }
+    }))
+    .pipe(uglify().on(&apos;error&apos;, function (err) {//压缩文件
+      console.log(&apos;\x07&apos;, err.lineNumber, err.message);
+      return this.end();
+    }))
+    .pipe(gulp.dest(&apos;./build/prd/scripts/&apos;));//输出文件
+});
+</code></pre><p>#####第四步：开启任务<br>    gulp packjs;//开启任务</p>
+<p>##九：mock数据获取</p>
+<p>#####1：引入插件<br>    var url=require(‘url’);//用于url的读取和设置<br>    var fs=require(‘fs’);//用于对mock文件的读取等操作<br>        注意：这两个文件是node.js中自带组件，不需要npm安装</p>
+<p>#####2：加入到本地服务中<br>    gulp.task(‘webserver’,function(){<br>    gulp.src(‘./‘)<br>        .pipe(webserver({<br>            host:’localhost’,<br>            port:80,<br>            directoryListing:{<br>                enable:true,<br>                path:’./‘<br>            },<br>            livereload:true,</p>
+<pre><code>        //读取mock数据
+        middleware:function(req,res,next){
+            var urlObj=url.parse(req.url,true);//获取请求url，并且封装成url对象
+            var method=req.method;//获取请求方式
+            switch(urlObj.pathname){
+                case &apos;/api/orders/&apos;:
+                    res.setHeader(&quot;Content-Type&quot;,&apos;application/json&apos;);
+                    fs.readFile(&apos;./mock/orders.json&apos;,&apos;utf-8&apos;,function(err,data){
+                        res.end(data);//返回给浏览器的数据
+                        console.log(data);//输出到控制台中
+                    });
+                    break;
+                case &apos;/api/goods/&apos;:
+                    break;
+                case &apos;/api/images&apos;:
+                    break;
+            }
+            next();
+        }
+
+    }));
+});
+</code></pre><p>#####3：开启本地服务<br>    gulp;//开启本地服务</p>
+<p>##10：gulp版本控制</p>
+<p>#####第一步：安装插件<br>    npm install gulp-rev -D;//生成版本号<br>    npm install gulp-rev-collector -D;//映射版本号</p>
+<p>#####第二步：引入插件</p>
+<p>#####第三步：创建任务</p>
+<p>#######创建任务一：生成版本号文件<br>    gulp.task(‘rev’,function(){<br>        gulp.src(cssDestFiles)<br>            .pipe(rev())//添加版本号即一段md5串<br>            .pipe(gulp.dest(‘./build/prd/styles/‘))<br>            .pipe(rev.manifest())<br>            .pipe(gulp.dest(‘./ver/styles’));</p>
+<pre><code>    gulp.src(jsDestFiles)
+        .pipe(rev())//添加版本号即一段md5串
+        .pipe(gulp.dest(&apos;./build/prd/scripts/&apos;))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest(&apos;./ver/scripts&apos;));
+});
+</code></pre><p>########创建任务二：根据版本映射文件，将html中的js与css自动更新成带版本号的文件名。<br>    gulp.task(‘revhtml’,function(){<br>        gulp.src([‘./ver/<em>*/</em>.json’,’./*.html’])<br>            .pipe(revCollector())//将两者映射起来，根据映射文件修改html文件js和css的版本号<br>            .pipe(gulp.dest(‘./‘));<br>    });</p>
+<p>#####第四步：开启任务<br>    gulp rev;<br>    gulp revhtml;</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/09/28/02-前端工程化之gulp与webpack详解/" data-title="gulp与webpack前端模块化构建工具的使用 | 沉默抒怀者" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="prev">
+<a href="/2016/09/21/html5与css3/01-css3属性之replaceholder的使用详解/"  title="css3属性之replaceholder的详解">
+ <strong>PREVIOUS:</strong><br/> 
+ <span>css3属性之replaceholder的详解
+</span>
+</a>
+</div>
+
+</nav>
+
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/09/28/02-前端工程化之gulp与webpack详解/" data-title="gulp与webpack前端模块化构建工具的使用" data-url="http://yoursite.com/2016/09/28/02-前端工程化之gulp与webpack详解/"></div>
+<!-- 多说评论框 end -->
+</div>  
+
+<script src="/js/snowstorm-min.js"></script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"2","bdPos":"right","bdTop":"100"},"image":{"viewList":["weixin","qzone","tsina","tqq","renren"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["weixin","qzone","tsina","tqq","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div>
+<script charset="Shift_JIS" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.js"></script>
+</div>
+
+
+  <div class="music">
+<p class="asidetitle">Music</p>
+<div class="music_player clearfix">
+<script type="text/javascript" src="http://www.xiami.com/widget/player-single?uid=45521081&sid=381307&mode=js"></script>
+</div>
+</div>
+
+  
+
+  
+<div class="categorieslist">
+<p class="asidetitle">Recent Posts</p>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2016/09/28/02-前端工程化之gulp与webpack详解/">gulp与webpack前端模块化构建工具的使用</a>
+      </li>
+    
+      <li>
+        <a href="/2016/09/21/html5与css3/01-css3属性之replaceholder的使用详解/">css3属性之replaceholder的详解</a>
+      </li>
+    
+      <li>
+        <a href="/2016/09/21/01-我的第一篇博客之github博客搭建过程/">我的第一篇博客</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
+<div class="widget">
+  <p class="asidetitle">Recent Comments</p>
+    
+<ul class="entry ds-recent-comments" data-num-items="8" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="70"></ul>
+</div>
+
+
+  
+
+
+  <div class="linklist">
+<h3 rel="grow" class="grow asidetitle">Blogroll</h3>
+<ul class="entry">
+<li><a href="http://www.cnblogs.com/voidy/" title="voidy's Blog">小鱼</a></li>
+<li><a href="http://haodong.net.cn/" title="haodong">耗子</a></li>
+<li><a href="http://lanlazy.gitcafe.io/" title="lanlazy">兰懒懒</a></li>
+<li><a href="http://chenxiaohua.net/" >努力加餐饭</a></li>
+<li><a href="http://www.techug.com/" >程序师</a></li>
+<li><a href="http://coolshell.cn/" >酷壳</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/" >阮一峰</a></li>
+<li><a href="http://www.chenshake.com/" >陈沙克</a></li>
+<li><a href="http://mindhacks.cn/" >刘未鹏</a></li>
+<li><a href="http://www.cnblogs.com/gorlf/">刘飞</a></li>
+<li><a href="http://rico93.xyz/">Rico</a></li>
+</ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="冯煜超">冯煜超</a>
+		
+		</p>
+</div>
+</footer>
+    
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?9723e4a6c94c2638d915c2747e92aef9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<div id="totop" style="position:fixed;bottom:50px;right:50px;cursor: pointer;">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+<script src="/js/scrolltop.js"></script>
+
+  </body>
+</html>
+
+
+<a href="https://github.com/Voidly"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
