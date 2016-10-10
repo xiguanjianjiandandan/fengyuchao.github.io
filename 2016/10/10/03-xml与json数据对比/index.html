@@ -4,18 +4,17 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>我的第一篇博客 | 沉默抒怀者</title>
+    <title>沉默抒怀者</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="冯煜超">
     
-    <meta name="description" content="今天是第一次在github中写博客，所以在此记录一下整个过程：
-###一：github博客书写过程：
+    <meta name="description" content="##xml与json数据对比：
+####一：xml数据
 
-hexo的安装（前提是需要安装nodejs）
-本地博客目录的创建（hexo init）
-将本地博客部署到github中（hexo g 然后是 hexo d)(generate , deplay)
-">
+数据格式：
+
+    &amp;lt;?xml version=”1.0” encoding=”utf-8” ?&amp;gt;          中国              黑龙江                  哈尔滨          大庆   ">
     
     
     
@@ -276,15 +275,15 @@ hexo的安装（前提是需要安装nodejs）
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/09/21/01-我的第一篇博客之github博客搭建过程/" title="我的第一篇博客" itemprop="url">我的第一篇博客</a>
+      <a href="/2016/10/10/03-xml与json数据对比/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="冯煜超">冯煜超</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-09-20T16:37:27.864Z" itemprop="datePublished">2016-09-21</time>
-    Updated:<time datetime="2016-09-18T13:32:12.000Z" itemprop="dateModified">2016-09-18</time>
+    <time datetime="2016-10-10T01:24:12.280Z" itemprop="datePublished">2016-10-10</time>
+    Updated:<time datetime="2016-10-10T01:21:58.709Z" itemprop="dateModified">2016-10-10</time>
     
   </p>
 </header>
@@ -296,16 +295,32 @@ hexo的安装（前提是需要安装nodejs）
 		
 		</div>
 		
-		<p>今天是第一次在github中写博客，所以在此记录一下整个过程：</p>
-<p>###一：github博客书写过程：</p>
+		<p>##xml与json数据对比：</p>
+<p>####一：xml数据</p>
 <ol>
-<li>hexo的安装（前提是需要安装nodejs）</li>
-<li>本地博客目录的创建（hexo init）</li>
-<li>将本地博客部署到github中（hexo g 然后是 hexo d)(generate , deplay)</li>
+<li>数据格式：</li>
 </ol>
-<p>具体详细过程请点击：<a href="http://blog.csdn.net/qq_15807167/article/details/51601234" target="_blank" rel="external">http://blog.csdn.net/qq_15807167/article/details/51601234</a></p>
-<p>整个过程常见问题总结<a href="http://blog.csdn.net/wx_962464/article/details/44786929" target="_blank" rel="external">http://blog.csdn.net/wx_962464/article/details/44786929</a></p>
-<p>###二：在浏览器中输入<a href="http://用户名.github.io，为什么一直报404的错误呢？" target="_blank" rel="external">http://用户名.github.io，为什么一直报404的错误呢？</a><br>    解决方法：在我们创建自己的博客仓库的时候，仓库名必须和用户名保持一致，<br>             即仓库名为：” 用户名.github.io “ 的格式。</p>
+<root><br><br>    &lt;?xml version=”1.0” encoding=”utf-8” ?&gt;<br>    <country><br>      <name>中国</name><br>      <province><br>        <name>黑龙江</name><br>        <citys><br>          <city>哈尔滨</city><br>          <city>大庆</city><br>        </citys>  　　<br>      </province><br>      <province><br>        <name>广东</name><br>        <citys><br>          <city>广州</city><br>          <city>深圳</city><br>          <city>珠海</city><br>        </citys> 　　<br>      </province><br>    </country><br></root>
+
+<ol>
+<li>xml语句的书写是严格定义的，必须有开头必须有&lt;?xml version=”1.0” encoding=”utf-8” ?&gt;，否则无法解析xml。</li>
+<li>xml的标签必须是打开和关闭标签同时存在，而且可以自定义标签。 </li>
+<li>可以通过CDATA预定义实体：即我们希望某些数据按原样格式插入到xml中，则可以使用<br> &lt;!CDATA[内容]&gt;</li>
+</ol>
+<p>####二：json数据<br>    var country =<br>        {<br>            name: “中国”,<br>            provinces: [<br>            { name: “黑龙江”, citys: { city: [“哈尔滨”, “大庆”]} },<br>            { name: “广东”, citys: { city: [“广州”, “深圳”, “珠海”]} },<br>            { name: “台湾”, citys: { city: [“台北”, “高雄”]} },<br>            { name: “新疆”, citys: { city: [“乌鲁木齐”]} }<br>            ]<br>        }</p>
+<ol>
+<li>json数据的定义只需要按照键值对的格式书写即可，没有其他规范</li>
+</ol>
+<p>####三：xml与json的优缺点：</p>
+<ol>
+<li><p>可读性：xml作为一种传统的标记语言，而且可以自定义标签，<br> 所以从开发者的角度来说，其可读性是要比json好（但是一般对开发者不方便的事，都是为了对计算机来说更加方便）</p>
+</li>
+<li><p>从代码的冗余程度来看，显然如果我们想要去承载相同大小的数据，xml除了数据，还有产生大量的打开闭合标签，而json只需要几个大括号，方括号即可。那同理，在数据交互时，xml就需要占用更多的带宽或者消耗更多的流量。</p>
+</li>
+<li><p>从传输速度上：json的传输速度要比xml好。</p>
+</li>
+</ol>
+<p>总结：当然，从整体来看，xml是被公认的一个数据格式，而json数据才刚刚开始。未来的话，或者xml会让位于json。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -315,7 +330,7 @@ hexo的安装（前提是需要安装nodejs）
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2016/09/21/01-我的第一篇博客之github博客搭建过程/" data-title="我的第一篇博客 | 沉默抒怀者" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2016/10/10/03-xml与json数据对比/" data-title="沉默抒怀者" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -324,20 +339,20 @@ hexo的安装（前提是需要安装nodejs）
 	
 <nav class="article-nav clearfix">
  
- <div class="next" >
- <a href="/2016/09/21/html5与css3/01-css3属性之replaceholder的使用详解/" title="css3属性之replaceholder的详解">
-  <strong>NEXT:</strong><br/>
-  <span>
-  css3属性之replaceholder的详解</span>
+
+<div class="prev">
+<a href="/2016/09/28/02-前端工程化之gulp与webpack详解/"  title="gulp与webpack前端模块化构建工具的使用">
+ <strong>PREVIOUS:</strong><br/> 
+ <span>gulp与webpack前端模块化构建工具的使用
+</span>
 </a>
 </div>
-
 
 </nav>
 
 
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2016/09/21/01-我的第一篇博客之github博客搭建过程/" data-title="我的第一篇博客" data-url="http://yoursite.com/2016/09/21/01-我的第一篇博客之github博客搭建过程/"></div>
+	<div class="ds-thread" data-thread-key="2016/10/10/03-xml与json数据对比/" data-title="" data-url="http://yoursite.com/2016/10/10/03-xml与json数据对比/"></div>
 <!-- 多说评论框 end -->
 </div>  
 
